@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-reactiveform',
@@ -24,13 +24,35 @@ export class ReactiveformComponent implements OnInit {
             city: [''],
             pin: ['']
           }
-        )
-      }
-    );
+        ),
+        cards: this.fb.array([this.buildForm()])
+      });
+  }
+
+  buildForm() {
+    return this.fb.group(
+      {
+        cardnumber: [''],
+        cvv: [''],
+        month: [''],
+        year: ['']
+      })
   }
 
   addProduct(product: any) {
     console.log(product);
   }
+
+  addCard() {
+    let card = <FormArray>this.productForm.controls['cards'];
+    card.push(this.buildForm());
+  }
+
+  removeCard(i: number) {
+    let card = <FormArray>this.productForm.controls['cards'];
+    card.removeAt(i);
+  }
+
+
 
 }

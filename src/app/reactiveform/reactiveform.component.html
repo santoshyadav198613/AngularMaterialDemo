@@ -3,31 +3,54 @@
 </p>
 {{productForm.value| json}}
 
-<form [formGroup]="productForm" (submit)="addProduct(productForm.value)" >
+<form [formGroup]="productForm" (submit)="addProduct(productForm.value)">
   <div class="form-group">
     <input class="form-control" type="number" name="id" formControlName="id">
   </div>
   <div class="form-group">
-      <input type="text" class="form-control" name="id" formControlName="name">
+    <input type="text" class="form-control" name="id" formControlName="name">
   </div>
   <div class="form-group">
-      <input type="number" class="form-control" name="id" formControlName="price">
+    <input type="number" class="form-control" name="id" formControlName="price">
   </div>
-  <div [formGroupName]="address">
-      <div class="form-group">
-          <input type="number" class="form-control" name="addr1" formControlName="addressLine1">
-      </div>
-      <div class="form-group">
-          <input type="number" class="form-control" name="addr2" formControlName="addressLine2">
-      </div>
-      <div class="form-group">
-          <input type="number" class="form-control" name="city" formControlName="city">
-      </div>
-      <div class="form-group">
-          <input type="number" class="form-control" name="pin" formControlName="pin">
-      </div>
+  <div formGroupName="address">
+    <div class="form-group">
+      <input type="text" class="form-control" name="addr1" formControlName="addressLine1">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="addr2" formControlName="addressLine2">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="city" formControlName="city">
+    </div>
+    <div class="form-group">
+      <input type="number" class="form-control" name="pin" formControlName="pin">
+    </div>
   </div>
+  <button class="btn btn-primary" (click)="addCard()">Add Card</button>
+  <div formArrayName="cards">
+    <div *ngFor="let card of productForm.controls.cards.controls;let i=index">
+      <div [formGroupName]="i"> 
+        <div>
+          <button class="btn btn-primary" (click)="removeCard(i)">Remove</button>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" name="card" formControlName="cardnumber">
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" name="cvv" formControlName="cvv">
+        </div>
+        <div class="form-group">
+          <input type="date" class="form-control" name="month" formControlName="month">
+        </div>
+        <div class="form-group">
+          <input type="date" class="form-control" name="year" formControlName="year">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div>
-      <button [disabled]="productForm.invalid"  type="submit" md-raised-button color="primary">Submit</button>
+    <button [disabled]="productForm.invalid" type="submit" md-raised-button color="primary">Submit</button>
   </div>
 </form>
