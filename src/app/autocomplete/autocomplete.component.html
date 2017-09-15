@@ -1,0 +1,23 @@
+<md-form-field>
+  <input type="text" name="user" mdInput [formControl]="name" [mdAutocomplete]="auto">
+</md-form-field>
+<md-autocomplete #auto="mdAutocomplete">
+  <md-option *ngFor="let name of filteredOptions | async" [value]="name">
+    {{name}}
+  </md-option>
+</md-autocomplete>
+<md-checkbox [formControl]="isValid">Check me!</md-checkbox>
+<md-form-field>
+  <input [formControl]="date" mdInput [mdDatepicker]="picker" placeholder="Choose a date">
+  <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+  <md-datepicker #picker></md-datepicker>
+</md-form-field>
+
+<md-radio-group>
+  <md-radio-button value="1">Option 1</md-radio-button>
+  <md-radio-button value="2">Option 2</md-radio-button>
+</md-radio-group>
+
+<md-slide-toggle [formControl]="isValid">Slide me!</md-slide-toggle>
+
+{{name.value|json}} {{isValid.value | json}} {{date.value | json}}

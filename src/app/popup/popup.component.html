@@ -1,0 +1,16 @@
+<h2 md-dialog-title>Install Angular</h2>
+<md-dialog-content>
+  {{user| json}}
+  <form #demoForm="ngForm" (submit)="submit()" novalidate>
+    <md-form-field class="example-full-width">
+      <input mdInput placeholder="First Name" name="firstname" [(ngModel)]="user.firstName">
+    </md-form-field>
+    <md-form-field class="example-full-width">
+      <input mdInput placeholder="Last Name" name="lastname" [(ngModel)]="user.lastName">
+    </md-form-field>
+  </form>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button (click)="closeDialog()" tabindex="1">Install</button>
+  <button md-button md-dialog-close tabindex="-1">Cancel</button>
+</md-dialog-actions>
